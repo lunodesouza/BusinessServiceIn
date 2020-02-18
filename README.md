@@ -1,7 +1,8 @@
 # BusinessServiceIn
 BusinessServiceIn Repository
 
-[![](https://jitpack.io/v/lunodesouza/BusinessServiceIn.svg)](https://jitpack.io/#lunodesouza/BusinessServiceIn)
+[![Repository](https://jitpack.io/v/lunodesouza/BusinessServiceIn.svg)](https://jitpack.io/#lunodesouza/BusinessServiceIn)
+[![Build Status](https://travis-ci.org/lunodesouza/BusinessServiceIn.svg?branch=master)](https://travis-ci.org/lunodesouza/BusinessServiceIn)
 ```xml
 <repositories>
     <repository>
