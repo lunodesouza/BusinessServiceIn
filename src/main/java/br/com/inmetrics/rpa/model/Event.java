@@ -1,22 +1,26 @@
 package br.com.inmetrics.rpa.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-"ROBOT_NAME",
-"BUSINESS_DESCRIPTION",
-"VALUE",
-"BUSINESS_DATETIME"
+	"ROBOT_NAME",
+	"BUSINESS_DESCRIPTION",
+	"VALUE",
+	"BUSINESS_DATETIME"
 })
 public class Event implements Serializable {
 	@JsonProperty("ROBOT_NAME")
@@ -24,9 +28,11 @@ public class Event implements Serializable {
 	@JsonProperty("BUSINESS_DESCRIPTION")
 	private String businessDescription;
 	@JsonProperty("VALUE")
-	private Integer value;
+	private String value;
 	@JsonProperty("BUSINESS_DATETIME")
 	private String businessDateTime;
+	
+	List<Event> eventList = new ArrayList<>();
 
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -37,9 +43,8 @@ public class Event implements Serializable {
 	 */
 	public Event() {
 	}
-
 	
-	public Event(String robotName, String businessDescription, Integer value, String businessDateTime) {
+	public Event(String robotName, String businessDescription, String value, String businessDateTime) {
 		super();
 		this.robotName = robotName;
 		this.businessDescription = businessDescription;
@@ -78,17 +83,22 @@ public class Event implements Serializable {
 	}
 
 	@JsonProperty("VALUE")
-	public Integer getVALUE() {
+	public String getVALUE() {
 		return value;
 	}
 
 	@JsonProperty("VALUE")
-	public void setVALUE(Integer value) {
+	public void setVALUE(String value) {
 		this.value = value;
 	}
 
-	public Event withValue(Integer value) {
+	public Event withValue(String value) {
 		this.value = value;
+		return this;
+	}
+	
+	public Event withValue(int value) {
+		this.value = String.valueOf(value);
 		return this;
 	}
 
@@ -120,6 +130,11 @@ public class Event implements Serializable {
 	public Event withAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
 		return this;
+	}
+	
+	public List<Event> asList(){
+		eventList.add(this);
+		return eventList;
 	}
 
 	@Override

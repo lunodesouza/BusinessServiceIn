@@ -8,8 +8,6 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import br.com.inmetrics.rpa.enums.ConfigEnum;
-
 /**
  * Classe responsável pela leitura da configuração no .properties
  * 
@@ -20,21 +18,17 @@ public class ConfigReader {
 	private static Logger log = Logger.getLogger(ConfigReader.class);
 	
 	private static Properties props;
-	private static String configProperties = ConfigEnum.CONFIG_PROPERTIES.getValue();
+	private static final String FIXED_CONFIG_PROPERTIES = "BusinessServiceIn.properties";
 
 	public ConfigReader() {
 		try {
-			if(null != configProperties) {
-				props = new Properties();
-				InputStream input = new FileInputStream(configProperties);
-				props.load(input);
-			} else {
-				log.warn("CONFIG_PROPERTIES: "+ configProperties);
-			}
+			props = new Properties();
+			InputStream input = new FileInputStream(FIXED_CONFIG_PROPERTIES);
+			props.load(input);
 		} catch(FileNotFoundException fnf ) {
-			log.warn("Properties can't be fount!", fnf);
+			log.error("Properties can't be found!", fnf);
 		} catch (IOException io) {
-			log.warn("Properties can't be read!", io);
+			log.error("Properties can't be read!", io);
 		}
 	}
 
@@ -46,14 +40,20 @@ public class ConfigReader {
 	 * @throws Exception 
 	 */
 	public static String read(String key) {
-		if (null == props) {
-			new ConfigReader();
+		try {
+			if (null == props) {
+				new ConfigReader();
+			}
+			
+			if (null == key) {
+				throw new Exception("Config propertie key cant be null");
+			}
+			
+			return null != props ? props.getProperty(key) : null;
+			
+		}catch(Exception e) {
+			log.error("ConfigReader FAIL: ", e);
 		}
-		
-		if (null == key) {
-			log.error("Config key is null.");
-		}
-		
-		return null != props ? props.getProperty(key) : null;
+		return null;
 	}
 }

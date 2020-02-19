@@ -1,64 +1,77 @@
 package br.com.inmetrics.rpa.model;
 
-import java.util.List;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import br.com.inmetrics.rpa.enums.ConfigEnum;
+import br.com.inmetrics.rpa.service.BusinessServiceIn;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ 
-"LOG_TYPE", 
-"CLIENT_NAME", 
-"SERVICE_TYPE", 
-"EVENTS" 
+	"LOG_TYPE", 
+	"CLIENT_NAME", 
+	"SERVICE_TYPE", 
+	"EVENTS" 
 })
 public class BusinessEvents implements Serializable {
-
 	@JsonProperty("LOG_TYPE")
 	private String logType;
 	@JsonProperty("CLIENT_NAME")
 	private String clientName;
 	@JsonProperty("SERVICE_TYPE")
 	private String serviceType;
-	@JsonProperty("EVENTS")
-	private List<Event> eventList = null;
+	@JsonProperty("EVENT")
+	private Event event;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 	private final static long serialVersionUID = 3546277791998097865L;
 
 	/**
-	 * No args constructor for use in serialization
+	 * Set config propertie params
 	 */
 	public BusinessEvents() {
+		this.logType = ConfigEnum.SERVICE_TYPE.getValue();
+		this.clientName = ConfigEnum.CLIENT_NAME.getValue();
+		this.serviceType = ConfigEnum.SERVICE_TYPE.getValue();
 	}
 
-	public BusinessEvents(String logType, String clientName, String serviceType, List<Event> eventList) {
+	public BusinessEvents(String logType, String clientName, String serviceType, Event event) {
 		super();
 		this.logType = logType;
 		this.clientName = clientName;
 		this.serviceType = serviceType;
-		this.eventList = eventList;
+		this.event = event;
+	}
+	
+	/**
+	 * Call to service sender
+	 */
+	public void send() {
+		new BusinessServiceIn().sendBusinessEvents(this);
 	}
 
 	@JsonProperty("LOG_TYPE")
-	public String getlogType() {
+	public String getLogType() {
 		return logType;
 	}
 
 	@JsonProperty("LOG_TYPE")
-	public void setlogType(String logType) {
+	public void setLogType(String logType) {
 		this.logType = logType;
 	}
 
-	public BusinessEvents withlogType(String logType) {
+	public BusinessEvents withLogType(String logType) {
 		this.logType = logType;
 		return this;
 	}
@@ -94,17 +107,17 @@ public class BusinessEvents implements Serializable {
 	}
 
 	@JsonProperty("EVENTS")
-	public List<Event> getEventList() {
-		return eventList;
+	public Event getEvent() {
+		return event;
 	}
 
 	@JsonProperty("EVENTS")
-	public void setEventList(List<Event> eventList) {
-		this.eventList = eventList;
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
-	public BusinessEvents withEventList(List<Event> eventList) {
-		this.eventList = eventList;
+	public BusinessEvents withEvent(Event event) {
+		this.event = event;
 		return this;
 	}
 
@@ -126,7 +139,7 @@ public class BusinessEvents implements Serializable {
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("logType", logType).append("clientName", clientName)
-				.append("serviceType", serviceType).append("eventList", eventList)
+				.append("serviceType", serviceType).append("event", event)
 				.append("additionalProperties", additionalProperties).toString();
 	}
 
