@@ -10,8 +10,7 @@ BusinessServiceIn Repository
       <url>https://jitpack.io</url>
     </repository>
 </repositories>
-```
-```xml
+
 <dependency>
     <groupId>com.github.lunodesouza</groupId>
     <artifactId>BusinessServiceIn</artifactId>
