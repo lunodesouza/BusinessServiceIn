@@ -21,6 +21,56 @@
 		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
 		<sonar.language>java</sonar.language>
 	</properties>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>resources/</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18</version>
+				<configuration>
+					<systemPropertyVariables>
+						<log4j.configuration>file:resources//log4j.properties</log4j.configuration>
+					</systemPropertyVariables>
+					<systemPropertyVariables>
+						<BusinessServiceInConfig>file:resources//BusinessServiceIn.properties</BusinessServiceInConfig>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<destFile>${sonar.jacoco.reportPath}</destFile>
+					<append>true</append>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
 
 	<dependencies>
 		<dependency>
@@ -46,13 +96,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>2.30</version>
+			<artifactId>jersey-client</artifactId> 
+			<version>2.25.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
-			<version>2.30</version>
+			<version>2.25.1</version>
 		</dependency>
 	</dependencies>
 </project>
