@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,7 +28,7 @@ public class BusinessEvents implements Serializable {
 	private String clientName;
 	@JsonProperty("SERVICE_TYPE")
 	private String serviceType;
-	@JsonProperty("EVENT")
+	@JsonProperty("EVENTS")
 	private Event event;
 	
 	@JsonIgnore
@@ -41,13 +39,13 @@ public class BusinessEvents implements Serializable {
 	 * Set config propertie params
 	 */
 	public BusinessEvents() {
-		this.logType = ConfigEnum.SERVICE_TYPE.getValue();
+		this.logType = ConfigEnum.LOG_TYPE.getValue();
 		this.clientName = ConfigEnum.CLIENT_NAME.getValue();
 		this.serviceType = ConfigEnum.SERVICE_TYPE.getValue();
 	}
 
 	public BusinessEvents(String logType, String clientName, String serviceType, Event event) {
-		super();
+		super(); 
 		this.logType = logType;
 		this.clientName = clientName;
 		this.serviceType = serviceType;
@@ -58,7 +56,7 @@ public class BusinessEvents implements Serializable {
 	 * Call to service sender
 	 */
 	public void send() {
-		new BusinessServiceIn().sendBusinessEvents(this);
+		new BusinessServiceIn().sendBusinessData(this);
 	}
 
 	@JsonProperty("LOG_TYPE")
@@ -134,13 +132,6 @@ public class BusinessEvents implements Serializable {
 	public BusinessEvents withAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
 		return this;
-	}
-
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this).append("logType", logType).append("clientName", clientName)
-				.append("serviceType", serviceType).append("event", event)
-				.append("additionalProperties", additionalProperties).toString();
-	}
+	}	
 
 }

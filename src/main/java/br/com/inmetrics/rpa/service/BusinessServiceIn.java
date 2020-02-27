@@ -12,6 +12,8 @@ import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.inmetrics.rpa.enums.ConfigEnum;
 import br.com.inmetrics.rpa.model.BusinessEvents;
 
@@ -29,7 +31,7 @@ public class BusinessServiceIn {
 	 * 
 	 * @param businessEvents
 	 */
-	public void sendBusinessEvents(BusinessEvents businessEvents) {
+	public void sendBusinessData(BusinessEvents businessEvents) {
 		log.info("# Sending Business Event");
 		
 		Client client = null;
@@ -53,9 +55,12 @@ public class BusinessServiceIn {
 									.header("Content-Type", "application/json;charset=UTF-8")
 								    .header("Accept", "application/json");
 			
-			response = invocationBuilder.post(Entity.entity(businessEvents, MediaType.APPLICATION_JSON));
+			ObjectMapper objectMapper = new ObjectMapper();
 			
-			log.debug("Response: "+ response);
+			response = invocationBuilder.post(Entity.entity(objectMapper.writeValueAsString(businessEvents), MediaType.APPLICATION_JSON_TYPE));
+			
+			log.info("Response: "+ response);
+			log.info(objectMapper.writeValueAsString(businessEvents));
 			
 			if(response.getStatus() >= HttpStatus.SC_BAD_REQUEST ) {
 				log.error("# Business Event sender FAIL: "+ response);
@@ -69,11 +74,14 @@ public class BusinessServiceIn {
 		} catch(Exception e) {
 			log.error("Business service error: ", e.getCause());
 		} finally {
-			response.close();
+			if(response != null) {
+				response.close();
+			}
 			client.close();
 			webTarget = null;
 		}
 	}
+
 	
 	/**
 	 * @return ServiceURIPropertie

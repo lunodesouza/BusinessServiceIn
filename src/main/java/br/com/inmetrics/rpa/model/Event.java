@@ -1,12 +1,8 @@
 package br.com.inmetrics.rpa.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -32,8 +28,6 @@ public class Event implements Serializable {
 	@JsonProperty("BUSINESS_DATETIME")
 	private String businessDateTime;
 	
-	List<Event> eventList = new ArrayList<>();
-
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 	private final static long serialVersionUID = -5707070398248172942L;
@@ -42,14 +36,6 @@ public class Event implements Serializable {
 	 * No args constructor for use in serialization
 	 */
 	public Event() {
-	}
-	
-	public Event(String robotName, String businessDescription, String value, String businessDateTime) {
-		super();
-		this.robotName = robotName;
-		this.businessDescription = businessDescription;
-		this.value = value;
-		this.businessDateTime = businessDateTime;
 	}
 
 	@JsonProperty("ROBOT_NAME")
@@ -132,16 +118,4 @@ public class Event implements Serializable {
 		return this;
 	}
 	
-	public List<Event> asList(){
-		eventList.add(this);
-		return eventList;
-	}
-
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this).append("robotName", robotName)
-				.append("businessDescription", businessDescription).append("value", value)
-				.append("businessDateTime", businessDateTime).append("additionalProperties", additionalProperties)
-				.toString();
-	}
 }
