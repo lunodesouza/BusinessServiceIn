@@ -1,6 +1,8 @@
 package br.com.inmetrics.rpa.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -101,6 +103,12 @@ public class Event implements Serializable {
 	public Event withDateTime(String businessDateTime) {
 		this.businessDateTime = businessDateTime;
 		return this;
+	}
+	
+	public Event withDateTimeNow() {
+		final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		this.businessDateTime =sdf.format(new Date());
+		return this ;
 	}
 
 	@JsonAnyGetter
