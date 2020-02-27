@@ -19,7 +19,8 @@ public class App {
 		Event event  = new Event().withRobotName("RPA BOT")
 				.withBusinessDescription("THE BUSINESS DESCRIPTION")
 				.withValue("2 units")
-				.withDateTime("27/02/2020 14:17");
+//				.withDateTime("27/02/2020 14:17");
+				.withDateTimeNow();
 		
 		new BusinessEvents().withEvent(event).send();
 		

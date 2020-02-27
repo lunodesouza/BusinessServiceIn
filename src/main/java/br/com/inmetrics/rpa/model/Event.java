@@ -106,8 +106,8 @@ public class Event implements Serializable {
 	}
 	
 	public Event withDateTimeNow() {
-		final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-		this.businessDateTime =sdf.format(new Date());
+		final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		this.businessDateTime = sdf.format(new Date());
 		return this ;
 	}
 
