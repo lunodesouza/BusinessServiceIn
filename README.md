@@ -11,9 +11,11 @@ BusinessServiceIn Repository
     </repository>
 </repositories>
 
-<dependency>
-    <groupId>com.github.lunodesouza</groupId>
-    <artifactId>BusinessServiceIn</artifactId>
-    <version>v1.0.2</version>
-</dependency>
+<dependencies>
+    <dependency>
+        <groupId>com.github.lunodesouza</groupId>
+        <artifactId>BusinessServiceIn</artifactId>
+        <version>v1.0.2</version>
+    </dependency>
+</dependencies>
 ```
