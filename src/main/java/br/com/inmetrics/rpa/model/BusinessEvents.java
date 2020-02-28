@@ -19,7 +19,7 @@ import br.com.inmetrics.rpa.service.BusinessServiceIn;
 	"LOG_TYPE", 
 	"CLIENT_NAME", 
 	"SERVICE_TYPE", 
-	"EVENTS" 
+	"EVENT" 
 })
 public class BusinessEvents implements Serializable {
 	@JsonProperty("LOG_TYPE")
@@ -104,12 +104,12 @@ public class BusinessEvents implements Serializable {
 		return this;
 	}
 
-	@JsonProperty("EVENTS")
+	@JsonProperty("EVENT")
 	public Event getEvent() {
 		return event;
 	}
 
-	@JsonProperty("EVENTS")
+	@JsonProperty("EVENT")
 	public void setEvent(Event event) {
 		this.event = event;
 	}
