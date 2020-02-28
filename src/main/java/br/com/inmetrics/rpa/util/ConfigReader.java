@@ -18,9 +18,11 @@ public class ConfigReader {
 	private static Logger log = Logger.getLogger(ConfigReader.class);
 	
 	private static Properties props;
-	private static final String FIXED_CONFIG_PROPERTIES = "BusinessServiceIn.properties";
+	private static final String USER_DIR = System.getProperty("user.dir");
+	private static final String FIXED_CONFIG_PROPERTIES = USER_DIR + "\\resources\\BusinessServiceIn.properties";
 
 	public ConfigReader() {
+		log.info("Try read: "+ FIXED_CONFIG_PROPERTIES);
 		try {
 			props = new Properties();
 			InputStream input = new FileInputStream(FIXED_CONFIG_PROPERTIES);
