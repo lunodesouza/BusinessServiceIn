@@ -28,7 +28,7 @@ public class BusinessEvents implements Serializable {
 	private String clientName;
 	@JsonProperty("SERVICE_TYPE")
 	private String serviceType;
-	@JsonProperty("EVENTS")
+	@JsonProperty("EVENT")
 	private Event event;
 	
 	@JsonIgnore
