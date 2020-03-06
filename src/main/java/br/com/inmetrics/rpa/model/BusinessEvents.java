@@ -1,7 +1,11 @@
 package br.com.inmetrics.rpa.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -19,7 +23,9 @@ import br.com.inmetrics.rpa.service.BusinessServiceIn;
 	"LOG_TYPE", 
 	"CLIENT_NAME", 
 	"SERVICE_TYPE", 
-	"EVENT" 
+	"ROBOT_NAME",
+	"BUSINESS_DATETIME",
+	"EVENTS" 
 })
 public class BusinessEvents implements Serializable {
 	@JsonProperty("LOG_TYPE")
@@ -28,8 +34,16 @@ public class BusinessEvents implements Serializable {
 	private String clientName;
 	@JsonProperty("SERVICE_TYPE")
 	private String serviceType;
-	@JsonProperty("EVENT")
+	@JsonProperty("ROBOT_NAME")
+	private String robotName;
+	@JsonProperty("BUSINESS_DATETIME")
+	private String businessDateTime;
+	
+	@JsonProperty("EVENTS")
 	private Event event;
+	
+	@JsonProperty("EVENTS")
+	private List<Event> eventList;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -58,6 +72,12 @@ public class BusinessEvents implements Serializable {
 	public void send() {
 		new BusinessServiceIn().sendBusinessData(this);
 	}
+	
+	public List<Event> asList(){
+		eventList.add(event);
+		return eventList;
+	}
+
 
 	@JsonProperty("LOG_TYPE")
 	public String getLogType() {
@@ -103,19 +123,71 @@ public class BusinessEvents implements Serializable {
 		this.serviceType = serviceType;
 		return this;
 	}
-
-	@JsonProperty("EVENT")
-	public Event getEvent() {
-		return event;
+	
+	@JsonProperty("ROBOT_NAME")
+	public String getRobotName() {
+		return robotName;
 	}
 
-	@JsonProperty("EVENT")
-	public void setEvent(Event event) {
-		this.event = event;
+	@JsonProperty("ROBOT_NAME")
+	public void setRobotName(String robotName) {
+		this.robotName = robotName;
+	}
+
+	public BusinessEvents withRobotName(String robotName) {
+		this.robotName = robotName;
+		return this;
+	}
+	
+	@JsonProperty("BUSINESS_DATETIME")
+	public String getDateTime() {
+		return businessDateTime;
+	}
+
+	@JsonProperty("BUSINESS_DATETIME")
+	public void setDateTime(String businessDateTime) {
+		this.businessDateTime = businessDateTime;
+	}
+
+	public BusinessEvents withDateTime(String businessDateTime) {
+		this.businessDateTime = businessDateTime;
+		return this;
+	}
+	
+	public BusinessEvents withDateTimeNow() {
+		final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		this.businessDateTime = sdf.format(new Date());
+		return this ;
+	}
+
+//	@JsonProperty("EVENT") 
+//	public Event getEvent() {
+//		return event;
+//	}
+//
+//	@JsonProperty("EVENT")
+//	public void setEvent(Event event) {
+//		eventList.add(event);
+//	}
+	
+	@JsonProperty("EVENTS")
+	public List<Event> getEvents() {
+		return eventList;
+	}
+
+	@JsonProperty("EVENTS")
+	public void setEvents(Event event) {
+		eventList.add(event);
+	}
+	
+	public BusinessEvents withEvents(List<Event> events) {
+		eventList = events;
+		return this;
 	}
 
 	public BusinessEvents withEvent(Event event) {
-		this.event = event;
+		eventList = new ArrayList<>();
+		eventList.add(event);
 		return this;
 	}
 

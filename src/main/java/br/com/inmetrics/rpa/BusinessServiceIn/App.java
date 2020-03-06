@@ -1,5 +1,8 @@
 package br.com.inmetrics.rpa.BusinessServiceIn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import br.com.inmetrics.rpa.enums.ConfigEnum;
@@ -16,13 +19,42 @@ public class App {
 	public static void main(String[] args) {
 		log.info("Service Configured: "+ ConfigEnum.SERVICE_URI.getValue());
 		
-		Event event  = new Event().withRobotName("RPA BOT")
-				.withBusinessDescription("THE BUSINESS DESCRIPTION")
-				.withValue("2 units")
-//				.withDateTime("27/02/2020 14:17");
-				.withDateTimeNow();
+		/**
+		 * Enviando 1 EVENTO
+		 */
+		Event event  = new Event()
+				.withBusinessDescription("GUIAS_ENVIADAS_ANALISE")
+				.withValue(2200);
 		
-		new BusinessEvents().withEvent(event).send();
+		new BusinessEvents().withRobotName("RPA_SADT")
+							.withDateTimeNow()
+							.withEvent(event)
+							.send();
+		
+		/**
+		 * Enviando uma lista de eventos
+		 */
+		List<Event> eventList = new ArrayList<>();
+		
+		eventList.add(new Event()
+				.withBusinessDescription("GUIAS_ENVIADAS")
+				.withValue(5523)
+		);
+		
+		eventList.add(new Event()
+					.withBusinessDescription("GUIAS_COM_ERRO")
+					.withValue(80)
+		);
+		
+		eventList.add(new Event()
+					.withBusinessDescription("GUIAS_CPF_ERRADO")
+					.withValue(55)
+		);
+		
+		new BusinessEvents().withRobotName("RPA_SADT")
+					.withDateTimeNow()
+					.withEvents(eventList)
+					.send();
 		
 	}
 
