@@ -68,7 +68,7 @@ public class Event implements Serializable {
 	}
 	
 	public Event withValue(Double value) {
-		this.value = String.valueOf(value.doubleValue());
+		this.value = Double.toString(value);
 		return this;
 	}
 
