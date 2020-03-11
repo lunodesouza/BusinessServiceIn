@@ -66,6 +66,11 @@ public class Event implements Serializable {
 		this.value = String.valueOf(value);
 		return this;
 	}
+	
+	public Event withValue(Double value) {
+		this.value = String.valueOf(value.doubleValue());
+		return this;
+	}
 
 	@JsonAnyGetter
 	public Map<String, Object> getAdditionalProperties() {
