@@ -15,7 +15,7 @@ BusinessServiceIn Repository
     <dependency>
         <groupId>com.github.lunodesouza</groupId>
         <artifactId>BusinessServiceIn</artifactId>
-        <version>v1.0.4</version>
+        <version>v1.0.6</version>
     </dependency>
 </dependencies>
 ```
