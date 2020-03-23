@@ -1,4 +1,4 @@
-package br.com.inmetrics.rpa.util;
+package com.github.lunodesouza.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

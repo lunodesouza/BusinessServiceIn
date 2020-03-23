@@ -1,13 +1,13 @@
-package br.com.inmetrics.rpa.BusinessServiceIn;
+package com.github.lunodesouza.BusinessServiceIn;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import br.com.inmetrics.rpa.enums.ConfigEnum;
-import br.com.inmetrics.rpa.model.BusinessEvents;
-import br.com.inmetrics.rpa.model.Event;
+import com.github.lunodesouza.enums.ConfigEnum;
+import com.github.lunodesouza.model.BusinessEvents;
+import com.github.lunodesouza.model.Event;
 
 /**
  * Hello world!

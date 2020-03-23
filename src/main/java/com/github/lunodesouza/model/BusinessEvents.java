@@ -1,4 +1,4 @@
-package br.com.inmetrics.rpa.model;
+package com.github.lunodesouza.model;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -14,9 +14,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-import br.com.inmetrics.rpa.enums.ConfigEnum;
-import br.com.inmetrics.rpa.service.BusinessServiceIn;
+import com.github.lunodesouza.enums.ConfigEnum;
+import com.github.lunodesouza.service.BusinessServiceIn;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ 

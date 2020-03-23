@@ -1,4 +1,4 @@
-package br.com.inmetrics.rpa.service;
+package com.github.lunodesouza.service;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -13,9 +13,8 @@ import org.apache.log4j.Logger;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import br.com.inmetrics.rpa.enums.ConfigEnum;
-import br.com.inmetrics.rpa.model.BusinessEvents;
+import com.github.lunodesouza.enums.ConfigEnum;
+import com.github.lunodesouza.model.BusinessEvents;
 
 /**
  * Simple BusinessServiceIn Service JAX-RS client using Jersey implementation

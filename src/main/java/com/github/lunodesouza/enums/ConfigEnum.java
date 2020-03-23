@@ -1,6 +1,6 @@
-package br.com.inmetrics.rpa.enums;
+package com.github.lunodesouza.enums;
 
-import br.com.inmetrics.rpa.util.ConfigReader;
+import com.github.lunodesouza.util.ConfigReader;
 
 public enum ConfigEnum {
 	/* Properties de configuração */

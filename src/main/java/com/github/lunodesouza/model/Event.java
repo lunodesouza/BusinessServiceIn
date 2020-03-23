@@ -1,4 +1,4 @@
-package br.com.inmetrics.rpa.model;
+package com.github.lunodesouza.model;
 
 import java.io.Serializable;
 import java.util.HashMap;

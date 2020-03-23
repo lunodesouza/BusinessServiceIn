@@ -1,4 +1,4 @@
-package br.com.inmetrics.rpa.BusinessServiceIn;
+package com.github.lunodesouza.BusinessServiceIn;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
