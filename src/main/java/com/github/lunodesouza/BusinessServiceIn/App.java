@@ -23,10 +23,10 @@ public class App {
 		 * Enviando 1 EVENTO
 		 */
 		Event event  = new Event()
-				.withBusinessDescription("GUIAS_ENVIADAS_ANALISE")
+				.withBusinessDescription("ENVIDOS")
 				.withValue(2200);
 		
-		new BusinessEvents().withRobotName("RPA_SADT")
+		new BusinessEvents().withRobotName("ROBO 1")
 							.withDateTimeNow()
 							.withEvent(event)
 							.send();
@@ -37,21 +37,21 @@ public class App {
 		List<Event> eventList = new ArrayList<>();
 		
 		eventList.add(new Event()
-				.withBusinessDescription("GUIAS_ENVIADAS")
+				.withBusinessDescription("ENVIADO")
 				.withValue(5523)
 		);
 		
 		eventList.add(new Event()
-					.withBusinessDescription("GUIAS_COM_ERRO")
+					.withBusinessDescription("ERRO")
 					.withValue(80)
 		);
 		
 		eventList.add(new Event()
-					.withBusinessDescription("GUIAS_CPF_ERRADO")
+					.withBusinessDescription("CPF NAO EXISTE")
 					.withValue(55)
 		);
 		
-		new BusinessEvents().withRobotName("RPA_SADT")
+		new BusinessEvents().withRobotName("ROBO 2")
 					.withDateTimeNow()
 					.withEvents(eventList)
 					.send();
